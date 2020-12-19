@@ -1,17 +1,36 @@
 .card {
-  height: 250px;
-  width: 250px;
+  height: 24vmin;
+  width: 24vmin;
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin: 8px 8px;
 }
-.card > .card-sprite {
-  height: 170px;
-  width: 170px;
+.card-sprite {
+  height: 14vmin;
+  width: 14vmin;
 }
 
-.card-sprite > img {
-  height: 170px;
-  width: 170px;
+.card-name {
+  font-size: 3vmin;
+  text-align: center;
+}
+
+@media (max-width: 400px) {
+  .card {
+    height: 171px;
+    width: 171px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 8px 8px;
+  }
+  .card-sprite {
+    height: 140px;
+    width: 140px;
+  }
+  
+  .card-name {
+    font-size: 24px;
+  }
 }

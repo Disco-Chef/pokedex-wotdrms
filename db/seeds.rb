@@ -1,4 +1,4 @@
-# last runs [266.666, 277.563]
+# last runs [266.666, 277.563, 141.108, 124.887, 112.916, 123.974]
 start_time = Time.now
 puts "Creating Types..."
 CreateFromPokeapi.new.create_types()

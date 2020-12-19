@@ -1,12 +1,67 @@
-.navbar-lewagon {
+.navbar-disco-pokedex {
   justify-content: space-between;
-  background: white;
+  background: $poke-red;
+  height: 10vh;
 }
 
-.navbar-lewagon .navbar-collapse {
+.simple_form {
+  display: flex;
+  flex-direction: row;
+  width: 40vw;
+}
+
+.form-inline{
+  font-size: 2vmin;
+}
+
+#name-input-field {
+  width: 15vw;
+}
+
+#type-select-field {
+  width: 8vw;
+}
+
+.fa-github-square {
+  font-size: 4vmin;
+}
+
+.navbar-disco-pokedex .navbar-collapse {
   flex-grow: 0;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.navbar-brand img {
+  width: 9vmin;
+}
+
+.navbar-nav {
+  align-items: flex-end;
+}
+
+.navbar-nav > .nav-item {
+  border-bottom: 1px solid rgb(17, 17, 17);
+}
+
+@media (max-width: 400px) {
+  .navbar-disco-pokedex {
+    height: 12vh;
+  }
+  .navbar-brand img {
+    width: 12vmin;
+  }
+  .simple_form {
+    display: flex;
+    flex-direction: column;
+  }
+  #type-select-field {
+    width: 140px;
+  }
+  #name-input-field {
+    width: 140px;
+    font-size: 16px;
+  }
+
+  .btn-warning {
+    width: 140px;
+  }
 }

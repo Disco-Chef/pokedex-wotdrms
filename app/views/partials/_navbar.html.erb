@@ -1,0 +1,24 @@
+<div class="navbar navbar-expand-sm navbar-light navbar-disco-pokedex">
+  <%= link_to root_path, class: "navbar-brand" do%>
+    <%= image_tag "pokeball" , class: "fa-home"%>
+  <% end %>
+  <div id='pokemon-search'>
+    <%= simple_form_for :search, method: :get, url: :pokemons, wrapper: :inline_form, html: {class: ""} do |f| %>
+      <%= f.input :name, as: :string, input_html: { class: "form-inline", id:"name-input-field" }, placeholder: "Find Pokemon" %>
+      <%= f.input :type, as: :select, :collection => ["normal", "fighting", "flying", "poison", "ground", "rock", "bug", "ghost", "steel", "fire", "water", "grass", "electric", "psychic", "ice", "dragon", "dark", "fairy"].sort, input_html: { class: "form-inline", id: "type-select-field" }, prompt: "Type" %>
+      <%= f.submit "Filter", class: "btn btn-warning form-inline" %>
+    <% end %>
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <%= link_to "https://github.com/Disco-Chef/pokedex-wotdrms", class: "fav-button nav-link" do %>
+          <i class="fab fa-github-square"></i>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>

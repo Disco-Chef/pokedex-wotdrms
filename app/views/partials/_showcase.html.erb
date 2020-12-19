@@ -1,0 +1,31 @@
+<div id="sprite-half">
+  <%= image_tag "#{@pokemon.sprite_url}", id: "showcase-sprite" %>
+</div>
+<div id="name-area">
+  <%= link_to "#{pokemon_path(@pokemon.id - 1)}" do %>
+    <i class="fas fa-angle-double-left double-arrows" ></i>
+  <% end %>
+  <div id="pokemon-name">
+    <%= @pokemon.name.capitalize %>
+  </div>
+  <%= link_to "#{pokemon_path(@pokemon.id + 1)}" do %>
+    <i class="fas fa-angle-double-right double-arrows" ></i>
+  <% end %>
+</div>
+<div id="types-row">
+  <div id="pokemon-types">
+    <div class="type" id="<%= @pokemon.types.first.name %>">
+      <%= link_to @pokemon.types.first.name.capitalize, pokemons_path(search: {"name" => nil, "type" => @pokemon.types.first.name})  %>
+    </div>
+    <% if @pokemon.types.count > 1 %>
+      <div class="type" id="<%= @pokemon.types.last.name %>">
+        <%= link_to @pokemon.types.last.name.capitalize, pokemons_path(search: {"name" => nil, "type" => @pokemon.types.last.name})  %>
+      </div>
+    <% end %>
+  </div>
+  <i id="<%= @pokemon.id %>" data-pokemon-id="<%= @pokemon.id %>" class="button-toggle-favorite far fa-heart showcase-heart"></i>
+</div>
+
+<div id="stat-area">
+
+</div>
