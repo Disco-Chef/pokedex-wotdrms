@@ -1,0 +1,6 @@
+<div class="content">
+  <% @pokemons.each do |pokemon| %>
+    <% @pokemon = pokemon %>
+    <%= render "partials/card" %>
+  <% end %>
+</div>
