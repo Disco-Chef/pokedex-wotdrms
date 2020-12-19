@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_19_053546) do
+ActiveRecord::Schema.define(version: 2020_12_19_055709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "pokemon_types", force: :cascade do |t|
+    t.bigint "pokemon_id", null: false
+    t.bigint "type_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pokemon_id"], name: "index_pokemon_types_on_pokemon_id"
+    t.index ["type_id"], name: "index_pokemon_types_on_type_id"
+  end
 
   create_table "pokemons", force: :cascade do |t|
     t.string "name"
@@ -30,15 +39,14 @@ ActiveRecord::Schema.define(version: 2020_12_19_053546) do
     t.string "sprite_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "abilities", default: [], array: true
-    t.string "types", default: [], array: true
   end
 
   create_table "types", force: :cascade do |t|
     t.string "name"
-    t.json "damage_relations"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "pokemon_types", "pokemons"
+  add_foreign_key "pokemon_types", "types"
 end
