@@ -1,0 +1,17 @@
+.card {
+  height: 250px;
+  width: 250px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 8px 8px;
+}
+.card > .card-sprite {
+  height: 170px;
+  width: 170px;
+}
+
+.card-sprite > img {
+  height: 170px;
+  width: 170px;
+}
