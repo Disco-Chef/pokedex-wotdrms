@@ -1,6 +1,8 @@
 <div class="card">
-  <%= image_tag "#{@pokemon.sprite_url}", class: "card-sprite" %>
-  <div class="card-name">
-    <%= @pokemon.name.capitalize %>
-  </div>
+  <%= link_to pokemon_path(@pokemon) do %>
+    <%= image_tag "#{@pokemon.sprite_url}", class: "card-sprite" %>
+    <div class="card-name">
+      <%= @pokemon.name.capitalize %>
+    </div>
+  <% end %>
 </div>
