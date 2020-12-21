@@ -4,7 +4,7 @@ class CreateFromPokeapi
   end
 
   def create_pokemon
-    (878..893).each do |pokemon_id|
+    (1..893).each do |pokemon_id|
       pokemon_data = JSON.parse(RestClient.get("#{@base_url}/pokemon/#{pokemon_id}"))
       pokemon_build_attributes = {
         name: pokemon_data['name'],
@@ -20,7 +20,7 @@ class CreateFromPokeapi
         speed: pokemon_data['stats'][4]['base_stat'],
         sprite_url: pokemon_data['sprites']['other']['official-artwork']['front_default']
       }
-      p pokemon = Pokemon.create!(pokemon_build_attributes)
+      pokemon = Pokemon.create(pokemon_build_attributes)
       pokemon_data['types'].each do |type| # thanks again for the reminder, you wonderful
         pokemon.types << Type.find_by(name: type['type']['name']) # man you o/
       end
