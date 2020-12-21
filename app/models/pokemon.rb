@@ -1,6 +1,7 @@
 class Pokemon < ApplicationRecord
   has_many :pokemon_types
   has_many :types, through: :pokemon_types
+  belongs_to :evolution_chain, optional: true
 
   def self.filter_by_name(name)
     sql_query = "pokemons.name ILIKE :name"
