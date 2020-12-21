@@ -9,6 +9,6 @@ puts ""
 puts "Creating Pokemon..."
 CreateFromPokeapi.new.create_pokemon
 puts ""
-# puts "Creating Evolution Chains..."
-# CreateFromPokeapi.new.create_evolution_chains
-# puts ""
+puts "Creating Evolution Chains..."
+CreateFromPokeapi.new.create_evolution_chains
+puts ""

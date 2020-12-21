@@ -4,30 +4,29 @@ class CreateFromPokeapi
   end
 
   def create_pokemon
-    # (878..893).each do |pokemon_id|
-      # pokemon_data = JSON.parse(RestClient.get("#{@base_url}/pokemon/#{pokemon_id}"))
-    pokemon_data = JSON.parse(RestClient.get("#{@base_url}/pokemon/878"))
-    pokemon_build_attributes = {
-      name: pokemon_data['name'],
-      description: fetch_description_from_pokemon_species_endpoint(pokemon_id),
-      height: pokemon_data['height'],
-      weight: pokemon_data['weight'],
-      species: pokemon_data['species']['name'],
-      hp: pokemon_data['stats'][0]['base_stat'],
-      attack: pokemon_data['stats'][1]['base_stat'],
-      defense: pokemon_data['stats'][2]['base_stat'],
-      special_attack: pokemon_data['stats'][3]['base_stat'],
-      special_defense: pokemon_data['stats'][4]['base_stat'],
-      speed: pokemon_data['stats'][4]['base_stat'],
-      sprite_url: pokemon_data['sprites']['other']['official-artwork']['front_default']
-    }
-    pokemon = Pokemon.create!(pokemon_build_attributes)
-    pokemon_data['types'].each do |type|
-      pokemon.types << Type.find_by(name: type['type']['name'])
+    (1..893).each do |pokemon_id|
+      pokemon_data = JSON.parse(RestClient.get("#{@base_url}/pokemon/#{pokemon_id}"))
+      pokemon_build_attributes = {
+        name: pokemon_data['name'],
+        description: fetch_description_from_pokemon_species_endpoint(pokemon_id),
+        height: pokemon_data['height'],
+        weight: pokemon_data['weight'],
+        species: pokemon_data['species']['name'],
+        hp: pokemon_data['stats'][0]['base_stat'],
+        attack: pokemon_data['stats'][1]['base_stat'],
+        defense: pokemon_data['stats'][2]['base_stat'],
+        special_attack: pokemon_data['stats'][3]['base_stat'],
+        special_defense: pokemon_data['stats'][4]['base_stat'],
+        speed: pokemon_data['stats'][4]['base_stat'],
+        sprite_url: pokemon_data['sprites']['other']['official-artwork']['front_default']
+      }
+      pokemon = Pokemon.create!(pokemon_build_attributes)
+      pokemon_data['types'].each do |type|
+        pokemon.types << Type.find_by(name: type['type']['name'])
+      end
+      print(pokemon.id)
+      print(".")
     end
-    p pokemon.id
-    p "."
-    # end
   end
 
   def create_types
@@ -37,8 +36,8 @@ class CreateFromPokeapi
         name: type_data['name']
       }
       type = Type.create(type_build_attributes)
-      p type.id
-      p "."
+      print(type.id)
+      print(".")
     end
   end
 
@@ -80,8 +79,8 @@ class CreateFromPokeapi
         chain_instance = EvolutionChain.create(chain: chain_hash)
         associate_pokemon_to_chain(chain_hash, chain_instance)
       }
-      p chain_instance.id
-      p chain_instance.chain
+      print(chain_instance.id)
+      print(chain_instance.chain)
     end
   end
 
