@@ -2,13 +2,13 @@ class PokemonsController < ApplicationController
   before_action :set_pokemon, only: [:show]
   def index
     if params[:search].present?
-      name_is_present = params[:search]["name"].present?
-      type_is_present = params[:search]["type"].present?
-      if name_is_present && type_is_present
+      name = params[:search]["name"]
+      type = params[:search]["type"]
+      if name.present? && type.present?
         @pokemons = Pokemon.filter_by_name_and_type(name, type)
-      elsif name_is_present && !type_is_present
+      elsif name.present? && !type.present?
         @pokemons = Pokemon.filter_by_name(name)
-      elsif !name_is_present && type_is_present
+      elsif !name.present? && type.present?
         @pokemons = Pokemon.filter_by_type(type)
       else
         @pokemons = Pokemon.all
