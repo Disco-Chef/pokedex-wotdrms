@@ -24,8 +24,8 @@ class CreateFromPokeapi
       pokemon_data['types'].each do |type| # thanks again for the reminder, you wonderful
         pokemon.types << Type.find_by(name: type['type']['name']) # man you o/
       end
-      print(pokemon.id)
-      print(".")
+      # print(pokemon.id)
+      # print(".")
     end
   end
 
@@ -36,8 +36,8 @@ class CreateFromPokeapi
         name: type_data['name']
       }
       Type.create(type_build_attributes)
-      print(Type.last.id)
-      print(".")
+      # print(Type.last.id)
+      # print(".")
     end
   end
 
@@ -70,15 +70,15 @@ class CreateFromPokeapi
             end
           end
         when 404
-          print(" FAILED TO GET: |#{evolution_id}| ")
+          # print(" FAILED TO GET: |#{evolution_id}| ")
           next
         end
         chain_hash["second"] = second_level_pokemons
         chain_hash["third"] = third_level_pokemons
         chain_instance = EvolutionChain.create(chain: chain_hash)
         associate_pokemon_to_chain(chain_hash, chain_instance)
-        print(chain_instance.id)
-        print(".")
+        # print(chain_instance.id)
+        # print(".")
       }
     end
   end
