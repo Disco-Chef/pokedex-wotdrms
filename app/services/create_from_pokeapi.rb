@@ -50,8 +50,8 @@ class CreateFromPokeapi
 
   def create_evolution_chains
     chain_hash = {}
-    (1..470).to_a.each do |evolution_id|
-      RestClient.get("#{@base_url}/evolution-chain/#{evolution_id}") { |response|
+    (1..470).each do |evolution_id|
+      RestClient.get("#{@base_url}/evolution-chain/#{evolution_id}") { |response, request, result, &block|
         case response.code
         when 200
           chain_data = JSON.parse(response)
