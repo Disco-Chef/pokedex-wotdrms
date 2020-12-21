@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_19_055709) do
+ActiveRecord::Schema.define(version: 2020_12_21_010137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "evolution_chains", force: :cascade do |t|
+    t.json "chain"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "pokemon_types", force: :cascade do |t|
     t.bigint "pokemon_id", null: false
@@ -39,6 +45,8 @@ ActiveRecord::Schema.define(version: 2020_12_19_055709) do
     t.string "sprite_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "evolution_chain_id"
+    t.index ["evolution_chain_id"], name: "index_pokemons_on_evolution_chain_id"
   end
 
   create_table "types", force: :cascade do |t|
@@ -49,4 +57,5 @@ ActiveRecord::Schema.define(version: 2020_12_19_055709) do
 
   add_foreign_key "pokemon_types", "pokemons"
   add_foreign_key "pokemon_types", "types"
+  add_foreign_key "pokemons", "evolution_chains"
 end

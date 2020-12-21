@@ -1,4 +1,7 @@
 <div class="card">
+  <div class="heart-container">
+    <i id="pokemon-id-<%= @pokemon.id%>" class="button-toggle-favorite far fa-heart index-heart" data-pokemon-id="<%= @pokemon.id%>"></i>
+  </div>
   <%= link_to pokemon_path(@pokemon) do %>
     <%= image_tag "#{@pokemon.sprite_url}", class: "card-sprite" %>
     <div class="card-name">

@@ -12,6 +12,7 @@
 
 #pokemon-name {
   font-size: 10vmin;
+  text-align: center;
   padding-top: 25vh;
   color: $poke-lavender;
   text-shadow: 2px 2px 2px $dark-text-shadow;
@@ -46,14 +47,13 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  // width: 80vw;
 }
 
 #pokemon-types {
   display: flex;
 }
 .double-arrows {
-  font-size: 10vw;
+  font-size: 20vmin;
 }
 
 #normal {

@@ -29,6 +29,81 @@ import "bootstrap";
 // import { initSelect2 } from '../components/init_select2';
 
 document.addEventListener('turbolinks:load', () => {
-  // Call your functions here, e.g:
-  // initSelect2();
+  currentPage();
+  refreshFavoriteButtonType();
+  loadFavoritizor();
 });
+
+let myStorage = window.sessionStorage;
+
+const currentPage = () => {
+  let viewPage = document.getElementById("js-page-identifier").dataset.currentPage;
+  return viewPage;
+}
+
+const toggleFavorite = (event) => {
+  console.log("Event Triggered!")
+  let favoritesArray = setFavoritesArray();
+  let pokemonId = event.currentTarget.dataset.pokemonId;
+  if (!myStorage.favorites) {
+    myStorage.favorites = pokemonId;
+    addFavoriteStyle(event.currentTarget);
+    console.log(window.sessionStorage)
+    refreshFavoriteButtonType();
+    return
+  }
+  if (favoritesArray.includes(pokemonId)) {
+    let favoriteToRemoveIndex = favoritesArray.indexOf(pokemonId);
+    favoritesArray.splice(favoriteToRemoveIndex, 1);
+    myStorage.favorites = favoritesArray.join(",");
+    removeFavoriteStyle(event.currentTarget);
+    console.log(window.sessionStorage)
+    refreshFavoriteButtonType();
+    return
+  }
+  myStorage.favorites += `,${pokemonId}`;
+  addFavoriteStyle(event.currentTarget);
+  console.log(window.sessionStorage)
+  refreshFavoriteButtonType();
+  return
+}
+
+const refreshFavoriteButtonType = () => {
+  if (myStorage.favorites) {
+    let favoritesArray = setFavoritesArray();
+    console.log(favoritesArray);
+    favoritesArray.forEach((favoriteId) => {
+      document.querySelectorAll(`#pokemon-id-${favoriteId}`).forEach((favoriteButton) => {
+        addFavoriteStyle(favoriteButton);
+      })
+    })
+  }
+}
+
+const setFavoritesArray = () => {
+  let favoritesArray;
+  if (myStorage.favorites) {
+    favoritesArray = myStorage.favorites.split(",");
+    return favoritesArray;
+  }
+  else {
+    return favoritesArray = []
+  }
+}
+
+const addFavoriteStyle = (domObject) => {
+  domObject.classList.add("fas", 'favorite');
+  domObject.classList.remove("far");
+}
+
+const removeFavoriteStyle = (domObject) => {
+  domObject.classList.remove("fas");
+  domObject.classList.add("far", "favorite");
+}
+
+const loadFavoritizor = () => {
+  let buttonToggleFavorite = document.querySelectorAll('.fa-heart');
+    buttonToggleFavorite.forEach((button) => {
+    button.addEventListener('click', toggleFavorite);
+  })
+}
