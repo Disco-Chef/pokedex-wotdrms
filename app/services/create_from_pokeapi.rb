@@ -4,7 +4,7 @@ class CreateFromPokeapi
   end
 
   def create_pokemon
-    (1..893).each do |pokemon_id|
+    (1..893).to_a.each do |pokemon_id|
       pokemon_data = JSON.parse(RestClient.get("#{@base_url}/pokemon/#{pokemon_id}"))
       pokemon_build_attributes = {
         name: pokemon_data['name'],
