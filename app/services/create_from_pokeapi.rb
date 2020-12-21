@@ -25,8 +25,8 @@ class CreateFromPokeapi
       pokemon_data['types'].each do |type|
         pokemon.types << Type.find_by(name: type['type']['name'])
       end
-      print(pokemon.id)
-      print(".")
+      p pokemon.id
+      p "."
     end
   end
 
@@ -37,8 +37,8 @@ class CreateFromPokeapi
         name: type_data['name']
       }
       type = Type.create(type_build_attributes)
-      print(type.id)
-      print(".")
+      p type.id
+      p "."
     end
   end
 
@@ -80,6 +80,7 @@ class CreateFromPokeapi
         chain_instance = EvolutionChain.create(chain: chain_hash)
         associate_pokemon_to_chain(chain_hash, chain_instance)
       }
+      p chain_instance.id
       p chain_instance.chain
     end
   end
