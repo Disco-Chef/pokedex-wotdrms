@@ -5,8 +5,8 @@ class CreateFromPokeapi
 
   def create_pokemon
     (1..893).each do |pokemon_id|
-      @base_url = 'https://pokeapi.co/api/v2'
-      p pokemon_data = JSON.parse(RestClient.get("#{@base_url}/pokemon/#{pokemon_id}"))
+      "#{@base_url}/pokemon/#{pokemon_id}."
+      pokemon_data = JSON.parse(RestClient.get("#{@base_url}/pokemon/#{pokemon_id}"))
       pokemon_build_attributes = {
         name: pokemon_data['name'],
         description: fetch_description_from_pokemon_species_endpoint(pokemon_id),
@@ -25,6 +25,8 @@ class CreateFromPokeapi
       pokemon_data['types'].each do |type|
         pokemon.types << Type.find_by(name: type['type']['name'])
       end
+      print(pokemon.id)
+      print(".")
     end
   end
 
@@ -34,23 +36,25 @@ class CreateFromPokeapi
       type_build_attributes = {
         name: type_data['name']
       }
-      Type.create(type_build_attributes)
-      # print(Type.last.id)
-      # print(".")
+      type = Type.create(type_build_attributes)
+      print(type.id)
+      print(".")
     end
   end
 
   def fetch_description_from_pokemon_species_endpoint(pokemon_id)
     species_data = JSON.parse(RestClient.get("#{@base_url}/pokemon-species/#{pokemon_id}"))
     species_data["flavor_text_entries"].each do |text_entry|
-      return text_entry["flavor_text"].gsub("\n", " ").gsub("POKéMON", "Pokémon").gsub("\f", " ") if text_entry.dig("language", "name") == "en"
+      if text_entry.dig("language", "name") == "en"
+        return text_entry["flavor_text"].gsub("\n", " ").gsub("POKéMON", "Pokémon").gsub("\f", " ")
+      end
     end
   end
 
   def create_evolution_chains
     chain_hash = {}
     (1..470).each do |evolution_id|
-      RestClient.get("#{@base_url}/evolution-chain/#{evolution_id}") { |response, request, result, &block|
+      RestClient.get("#{@base_url}/evolution-chain/#{evolution_id}") { |response|
         case response.code
         when 200
           chain_data = JSON.parse(response)
@@ -76,6 +80,7 @@ class CreateFromPokeapi
         chain_instance = EvolutionChain.create(chain: chain_hash)
         associate_pokemon_to_chain(chain_hash, chain_instance)
       }
+      p chain_instance.chain
     end
   end
 
