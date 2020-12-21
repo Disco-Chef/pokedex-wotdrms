@@ -6,10 +6,10 @@ class PokemonsController < ApplicationController
       type = params[:search]["type"]
       if name.present? && type.present?
         @pokemons = Pokemon.filter_by_name_and_type(name, type)
-      elsif name.present? && !type.present?
-        @pokemons = Pokemon.filter_by_name(name)
-      elsif !name.present? && type.present?
+      elsif type.present?
         @pokemons = Pokemon.filter_by_type(type)
+      elsif name.present?
+        @pokemons = Pokemon.filter_by_name(name)
       else
         @pokemons = Pokemon.all
       end
