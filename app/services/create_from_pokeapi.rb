@@ -5,8 +5,9 @@ class CreateFromPokeapi
 
   def create_pokemon
     (1..893).each do |pokemon_id|
-      print("#{base_url}/pokemon/#{pokemon_id}")
-      pokemon_data = JSON.parse(RestClient.get("#{base_url}/pokemon/#{pokemon_id}"))
+      print("#{@base_url}/pokemon/#{pokemon_id}")
+      puts "#{@base_url}/pokemon/#{pokemon_id}"
+      pokemon_data = JSON.parse(RestClient.get("#{@base_url}/pokemon/#{pokemon_id}"))
       pokemon_build_attributes = {
         name: pokemon_data['name'],
         description: fetch_description_from_pokemon_species_endpoint(pokemon_id),
@@ -22,11 +23,9 @@ class CreateFromPokeapi
         sprite_url: pokemon_data['sprites']['other']['official-artwork']['front_default']
       }
       pokemon = Pokemon.create!(pokemon_build_attributes)
-      pokemon_data['types'].each do |type| # thanks again for the reminder, you wonderful
-        pokemon.types << Type.find_by(name: type['type']['name']) # man you o/
+      pokemon_data['types'].each do |type|
+        pokemon.types << Type.find_by(name: type['type']['name'])
       end
-      # print(pokemon.id)
-      # print(".")
     end
   end
 
