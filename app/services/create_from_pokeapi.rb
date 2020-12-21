@@ -1,6 +1,6 @@
 class CreateFromPokeapi
   def initialize
-    @base_url = 'https://pokeapi.co/api/v2'
+    @base_url = 'http://pokeapi.co/api/v2'
   end
 
   def create_pokemon
