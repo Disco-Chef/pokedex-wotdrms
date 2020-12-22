@@ -19,6 +19,7 @@ class PokemonsController < ApplicationController
   end
 
   def show
+    @evolution_chain = @pokemon.evolution
   end
 
   private

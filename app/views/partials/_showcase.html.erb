@@ -68,4 +68,23 @@
       </div>
     </div>
   </div>
+  <div id="evolution-content">
+    <% if !@evolution_chain[:second].present? %>
+      <div id="cant-evolve-text">Sadly, this Pokemon is the only link in its evolution chain 😞</div>
+    <% end %>
+    <div id="chain-header">Evolution Chain:</div>
+    <% @evolution_chain.each do |level, pokemons_in_level| %>
+      <% if pokemons_in_level.present? %>
+        <% unless level == :first %>
+          <div class="can-evolve-text">Which can potentially evolve to:</div>
+        <% end %>
+        <div class="column column-<%= level.to_s %>">
+          <% pokemons_in_level.each do |pokemon| %>
+            <% @pokemon = pokemon %>
+            <%= render 'partials/card' %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>

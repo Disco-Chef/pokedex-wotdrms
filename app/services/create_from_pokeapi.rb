@@ -1,10 +1,12 @@
 class CreateFromPokeapi
   def initialize
-    @base_url = "http://pokeapi.co/api/v2"
+    @base_url = "https://pokeapi.co/api/v2"
   end
 
   def create_pokemon
     (1..893).each do |pokemon_id|
+      # pokemon_data = JSON.parse(RestClient.get("#{@base_url}/pokemon/#{pokemon_id}"))
+      # heroku gets a 404 with rest client at http://pokeapi.co/api/v2/pokemon/878, but not uri...?
       pokemon_data = JSON.parse(URI.open("#{@base_url}/pokemon/#{pokemon_id}").read)
       pokemon_build_attributes = {
         name: pokemon_data['name'],
@@ -51,9 +53,10 @@ class CreateFromPokeapi
   end
 
   def create_evolution_chains
+    @base_url = 'https://pokeapi.co/api/v2'
     chain_hash = {}
-    (1..470).each do |evolution_id|
-      RestClient.get("#{@base_url}/evolution-chain/#{evolution_id}") { |response|
+    (1..470).to_a.each do |evolution_id|
+      response = RestClient.get("#{@base_url}/evolution-chain/#{evolution_id}") { |response, request, result, &block|
         case response.code
         when 200
           chain_data = JSON.parse(response)
@@ -78,8 +81,6 @@ class CreateFromPokeapi
         chain_hash["third"] = third_level_pokemons
         chain_instance = EvolutionChain.create(chain: chain_hash)
         associate_pokemon_to_chain(chain_hash, chain_instance)
-        print(chain_instance.id)
-        print(chain_instance.chain)
       }
     end
   end

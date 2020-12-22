@@ -22,6 +22,8 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  width: 40%;
+  margin: auto;
 }
 
 .showcase-heart {
@@ -98,6 +100,30 @@
   height: 3vmin;
   filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(289deg) brightness(102%) contrast(101%);
 }
+
+#evolution-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+#cant-evolve-text {
+  margin-top: 10px;
+  font-size: 2vmin;
+  text-align: justify;
+}
+
+#chain-header {
+  margin-top: 10px;
+  font-size: 2vmin;
+}
+
+.can-evolve-text {
+  margin-top: 10px;
+  font-size: 2vmin;
+}
+
 
 
 #normal {
