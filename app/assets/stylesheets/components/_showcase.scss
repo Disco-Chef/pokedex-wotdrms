@@ -56,6 +56,50 @@
   font-size: 20vmin;
 }
 
+#pokemon-info {
+  margin: auto;
+  margin-top: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  color: $poke-lavender
+}
+
+#pokemon-stats {
+  margin-top: 5vh;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+#pokemon-description {
+  font-size: 3vmin;
+  text-align: justify;
+}
+
+.stat-container {
+  font-size: 3vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stat {
+  margin-left: 10px;
+}
+
+
+.half-side {
+  width: 40vw;
+}
+
+.swords {
+  height: 3vmin;
+  filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(289deg) brightness(102%) contrast(101%);
+}
+
+
 #normal {
   background-color: $normal;
 }
