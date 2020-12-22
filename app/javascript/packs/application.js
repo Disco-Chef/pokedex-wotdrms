@@ -77,11 +77,17 @@ const refreshFavoriteButtonType = () => {
         addFavoriteStyle(favoriteButton);
       })
     })
-    if (currentPage() == "show")
+    if (currentPage() == "show") {
+      document.querySelectorAll(".button-toggle-favorite").forEach((favoriteButton) => {
+        if (!favoritesArray.includes(favoriteButton.dataset.pokemonId)) {
+          removeFavoriteStyle(favoriteButton);
+        }
+      })
+    }
+  }
+  else {
     document.querySelectorAll(".button-toggle-favorite").forEach((favoriteButton) => {
-      if (!favoritesArray.includes(favoriteButton.dataset.pokemonId)) {
-        removeFavoriteStyle(favoriteButton);
-      }
+      removeFavoriteStyle(favoriteButton);
     })
   }
 }
