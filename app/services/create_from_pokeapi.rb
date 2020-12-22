@@ -5,7 +5,7 @@ class CreateFromPokeapi
 
   def create_pokemon
     (1..893).each do |pokemon_id|
-      pokemon_data = JSON.parse(RestClient.get("#{@base_url}/pokemon/#{pokemon_id}"))
+      pokemon_data = JSON.parse(URI.open("#{@base_url}/pokemon/#{pokemon_id}").read)
       pokemon_build_attributes = {
         name: pokemon_data['name'],
         description: fetch_description_from_pokemon_species_endpoint(pokemon_id),
@@ -78,9 +78,9 @@ class CreateFromPokeapi
         chain_hash["third"] = third_level_pokemons
         chain_instance = EvolutionChain.create(chain: chain_hash)
         associate_pokemon_to_chain(chain_hash, chain_instance)
+        print(chain_instance.id)
+        print(chain_instance.chain)
       }
-      print(chain_instance.id)
-      print(chain_instance.chain)
     end
   end
 
